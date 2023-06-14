@@ -1,6 +1,7 @@
 package dev.seratt.mailing_system_main.service;
 
 import dev.seratt.mailing_system_main.entity.Group;
+import dev.seratt.mailing_system_main.entity.User;
 import dev.seratt.mailing_system_main.repository.GroupRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class GroupServiceImpl implements GroupService {
 
     @Override
     public Group getGroup(int id) {
-        return groupRepository.findGroupById(id);
+        return groupRepository.findById(id);
     }
 
     @Override
@@ -38,6 +39,12 @@ public class GroupServiceImpl implements GroupService {
         return groupRepository.
                 findGroupsByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase
                         (searchText, searchText);
+    }
+
+    @Override
+    public List<User> getUsersByGroupId(int groupId) {
+        Group group = groupRepository.findById(groupId);
+        return group.getUsers();
     }
 
 }

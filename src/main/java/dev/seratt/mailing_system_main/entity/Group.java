@@ -35,11 +35,12 @@ public class Group {
     public Group() {
     }
 
-    public Group(int id, String title, String description, Date dateOfCreation) {
+    public Group(int id, String title, String description, Date dateOfCreation, List<User> users) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.dateOfCreation = dateOfCreation;
+        this.users = users;
     }
 
     public int getId() {
@@ -73,9 +74,11 @@ public class Group {
     public void setDateOfCreation(Date dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
+
     public List<User> getUsers() {
         return users;
     }
+
     public void setUsers(List<User> users) {
         this.users = users;
     }
