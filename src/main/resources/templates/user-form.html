@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Updating the user</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+<div>
+    <form class="form" th:action="@{/users/save}" method = "post" th:modelAttribute = "user">
+        <input type="hidden" name="id" th:value = "${user.id}">
+        <input type="hidden" name="dateOfCreation" th:value = "${user.dateOfCreation}">
+        name <input type="text" name="name" th:value = "${user.name}"> <br> <br>
+        surname <input type="text" name="surname" th:value = "${user.surname}"> <br> <br>
+        otchestvo <input type="text" name="otchestvo" th:value = "${user.otchestvo}"> <br> <br>
+        country <input type="text" name="country" th:value = "${user.country}"> <br> <br>
+        city <input type="text" name="city" th:value = "${user.city}"> <br> <br>
+        email <input type="text" name="email" th:value = "${user.email}"> <br> <br>
+        <input type="submit" value="Save">
+    </form>
+</div>
+<div class="d-flex justify-content-center">
+    <a href="/users">Back</a>
+</div>
+</body>
+</html>

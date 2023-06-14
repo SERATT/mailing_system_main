@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <form class="form" th:action="@{/groups/save}" method = "post" th:modelAttribute = "group">
+    <input type="hidden" name="id" th:value = "${group.id}">
+    <input type="hidden" name="dateOfCreation" th:value = "${group.dateOfCreation}">
+    title <input type="text" name="title" th:value = "${group.title}"> <br> <br>
+    description <input type="text" name="description" th:value = "${group.description}"> <br> <br>
+    <input type="submit" value="Save">
+  </form>
+
+  <div class="d-flex justify-content-center">
+      <a href="/groups">Back</a>
+  </div>
+</body>
+</html>

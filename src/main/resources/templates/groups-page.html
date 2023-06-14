@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Groups Page</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+<br>
+<br>
+<div class="input-group d-flex justify-content-center">
+  <form th:action="@{searchGroups}" method="get" th:modelAttribute = "groupsList">
+    <input type="text" name = "searchText"/>
+    <input type="submit">
+  </form>
+</div>
+<br>
+<br>
+<table class="table">
+  <thead>
+  <tr>
+    <th>title</th>
+    <th>description</th>
+    <th>date of creation</th>
+    <th>users</th>
+    <th>actions</th>
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr th:each="group: ${groupsList}">
+    <td th:text = "${group.title}"></td>
+    <td th:text = "${group.description}"></td>
+    <td th:text = "${group.dateOfCreation}"></td>
+    <td>
+      <ul>
+        <li th:each="user: ${group.users}">
+          name <p th:text = "${user.name}"></p>
+          surname <p th:text = "${user.surname}"></p>
+          otchestvo <p th:text = "${user.otchestvo}"></p>
+          country <p th:text = "${user.country}"></p>
+          city <p th:text = "${user.city}"></p>
+          email <p th:text = "${user.email}"></p>
+        </li>
+
+      </ul>
+    </td>
+    <td>
+      <form th:action="@{groups/save_update}" method="get">
+        <input type="hidden" name="id"  th:value = "${group.id}">
+        <input type="submit" value="Update">
+      </form>
+      <form th:action="@{/groups/delete}">
+        <input type="hidden" name="id" th:value = "${group.id}">
+        <input type="submit" value="Delete">
+      </form>
+    </td>
+  </tr>
+
+  </tbody>
+</table>
+<div class="d-flex justify-content-center">
+  <form th:action="@{/groups/save_update}">
+    <input type="hidden" name="id" th:value = "0">
+    <input class="ui-button" type="submit" value="Create">
+  </form>
+</div>
+<br>
+<br>
+<div class="d-flex justify-content-center">
+  <a href="/">Main Page</a>
+</div>
+</body>
+</html>
