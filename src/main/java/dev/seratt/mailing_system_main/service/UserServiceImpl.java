@@ -1,11 +1,13 @@
 package dev.seratt.mailing_system_main.service;
 
+import dev.seratt.mailing_system_main.entity.Group;
 import dev.seratt.mailing_system_main.entity.User;
 import dev.seratt.mailing_system_main.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUser(int id) {
-        return userRepository.findUserById(id);
+        return userRepository.findById(id);
     }
 
     @Override
@@ -34,7 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> search(String searchText){
+    public Set<User> search(String searchText){
         return userRepository
                 .findUsersByNameContainingIgnoreCaseOrSurnameContainingIgnoreCaseOrOtchestvoContainingIgnoreCaseOrCountryContainingIgnoreCaseOrCityContainingIgnoreCase(
                     searchText, searchText, searchText, searchText, searchText

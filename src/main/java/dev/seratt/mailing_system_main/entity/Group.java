@@ -1,10 +1,12 @@
 package dev.seratt.mailing_system_main.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "groups")
@@ -23,14 +25,15 @@ public class Group {
     @Column(name = "date_of_creation")
     private Date dateOfCreation;
 
+    @JsonIgnore
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_and_groups",
-            joinColumns = @JoinColumn(name = "group_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id")
+            joinColumns = @JoinColumn(name = "group_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
-    private List<User> users;
+    private Set<User> users;
 
     public Group() {
     }
@@ -73,21 +76,21 @@ public class Group {
     public void setDateOfCreation(Date dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
-    public List<User> getUsers() {
+
+    public Set<User> getUsers() {
         return users;
     }
-    public void setUsers(List<User> users) {
+
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 
-    @Override
-    public String toString() {
-        return "Group{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", dateOfCreation=" + dateOfCreation +
-                ", users=" + users +
-                '}';
+    public void addUser(User user) {
+        users.add(user);
+        user.getGroups().add(this);
+    }
+    public void removeUser(User user) {
+        users.remove(user);
+        user.getGroups().remove(this);
     }
 }

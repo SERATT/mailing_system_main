@@ -61,4 +61,12 @@ public class GroupCommunication {
         List<Group> groups = responseEntity.getBody();
         return groups;
     }
+
+    public void addUserToGroup(int userId, int groupId) {
+        restTemplate.put(URL+"/"+groupId+"/users/"+userId, null);
+    }
+
+    public void removeUserFromGroup(int userId, int groupId) {
+        restTemplate.delete(URL+"/"+groupId+"/users/"+userId);
+    }
 }

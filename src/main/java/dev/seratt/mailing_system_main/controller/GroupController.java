@@ -44,5 +44,17 @@ public class GroupController {
         return "redirect:/groups";
     }
 
+    @GetMapping("/addUser")
+    public String addUserToGroup(@RequestParam("userId") int userId, @RequestParam("groupId") int groupId){
+        groupCommunication.addUserToGroup(userId, groupId);
+        return "redirect:/groups";
+    }
+
+    @GetMapping("/removeUser")
+    public String removeUserFromGroup(@RequestParam("userId") int userId, @RequestParam("groupId") int groupId){
+        groupCommunication.removeUserFromGroup(userId, groupId);
+        return "redirect:/groups";
+    }
+
 
 }
