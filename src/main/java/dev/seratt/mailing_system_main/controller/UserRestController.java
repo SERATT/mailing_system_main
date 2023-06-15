@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -46,7 +47,7 @@ public class UserRestController {
     }
 
     @GetMapping("/users/search/{searchText}")
-    public List<User> searchUsers(@PathVariable String searchText){
+    public Set<User> searchUsers(@PathVariable String searchText){
         return userService.search(searchText);
     }
 }

@@ -2,11 +2,14 @@ package dev.seratt.mailing_system_main.entity;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.seratt.mailing_system_main.entity.Group;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -37,9 +40,9 @@ public class User {
     @Column(name = "date_of_creation")
     private Date dateOfCreation;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH}, mappedBy = "users")
-    private List<Group> groups;
+    @JsonIgnore
+    @ManyToMany(mappedBy = "users")
+    private Set<Group> groups = new HashSet<>();
 
     public User() {
     }
@@ -119,26 +122,11 @@ public class User {
         this.dateOfCreation = date_of_creation;
     }
 
-    public List<Group> getGroups() {
+    public Set<Group> getGroups() {
         return groups;
     }
 
-    public void setGroups(List<Group> groups) {
+    public void setGroups(Set<Group> groups) {
         this.groups = groups;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", otchestvo='" + otchestvo + '\'' +
-                ", country='" + country + '\'' +
-                ", city='" + city + '\'' +
-                ", email='" + email + '\'' +
-                ", dateOfCreation=" + dateOfCreation +
-                ", groups=" + groups +
-                '}';
     }
 }

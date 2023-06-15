@@ -43,6 +43,8 @@ public class GroupCommunication {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+        System.out.println(group.getUsers());
+        group.setUsers(group.getUsers());
         HttpEntity<Group> entity = new HttpEntity<Group>(group, headers);
         restTemplate.exchange(URL, HttpMethod.PUT, entity, String.class).getBody();
         System.out.println("Group with id " + id + " was updated");

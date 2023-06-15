@@ -10,7 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.List;
+import java.util.Set;
 
 @Controller
 public class MainController {
@@ -35,7 +35,7 @@ public class MainController {
         if(searchText.isEmpty()){
             return "redirect:/users";
         }
-        List<User> usersList = userService.search(searchText);
+        Set<User> usersList = userService.search(searchText);
         model.addAttribute("usersList", usersList);
         return "users-page";
     }
@@ -52,7 +52,7 @@ public class MainController {
         if(searchText.isEmpty()){
             return "redirect:/groups";
         }
-        List<Group> groupsList = groupService.search(searchText);
+        Set<Group> groupsList = groupService.search(searchText);
         model.addAttribute("groupsList", groupsList);
         return "groups-page";
     }

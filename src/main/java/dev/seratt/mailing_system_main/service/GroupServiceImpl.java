@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class GroupServiceImpl implements GroupService {
@@ -35,16 +36,20 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public List<Group> search(String searchText) {
+    public Set<Group> search(String searchText) {
         return groupRepository.
                 findGroupsByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase
                         (searchText, searchText);
     }
 
     @Override
-    public List<User> getUsersByGroupId(int groupId) {
+    public Set<User> getUsersByGroupId(int groupId) {
         Group group = groupRepository.findById(groupId);
         return group.getUsers();
     }
 
+    @Override
+    public Group save(Group group) {
+        return groupRepository.save(group);
+    }
 }

@@ -4,6 +4,7 @@ package dev.seratt.mailing_system_main.service;
 import dev.seratt.mailing_system_main.entity.User;
 
 import java.util.List;
+import java.util.Set;
 
 public interface UserService {
     public List<User> getAllUsers();
@@ -14,5 +15,5 @@ public interface UserService {
 
     public void deleteUser(int id);
 
-    public List<User> search(String searchText);
+    public Set<User> search(String searchText);
 }
