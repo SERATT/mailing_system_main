@@ -38,6 +38,7 @@
     <td>
       <ul>
         <li th:each="user: ${group.users}">
+          id <p th:text = "${user.id}"></p>
           name <p th:text = "${user.name}"></p>
           surname <p th:text = "${user.surname}"></p>
           otchestvo <p th:text = "${user.otchestvo}"></p>
@@ -56,6 +57,16 @@
       <form th:action="@{/groups/delete}">
         <input type="hidden" name="id" th:value = "${group.id}">
         <input type="submit" value="Delete">
+      </form>
+      <form th:action="@{groups/addUser}" method="get">
+        <input type="hidden" name="groupId"  th:value = "${group.id}">
+        <input type="text" name="userId"  placeholder="Type id of user you want to add">
+        <input type="submit" value="Add User">
+      </form>
+      <form th:action="@{groups/removeUser}" method="get">
+        <input type="hidden" name="groupId"  th:value = "${group.id}">
+        <input type="text" name="userId"  placeholder="Type id of user you want to remove">
+        <input type="submit" value="Remove User">
       </form>
     </td>
   </tr>

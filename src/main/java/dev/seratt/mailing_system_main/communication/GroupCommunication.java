@@ -43,8 +43,6 @@ public class GroupCommunication {
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-        System.out.println(group.getUsers());
-        group.setUsers(group.getUsers());
         HttpEntity<Group> entity = new HttpEntity<Group>(group, headers);
         restTemplate.exchange(URL, HttpMethod.PUT, entity, String.class).getBody();
         System.out.println("Group with id " + id + " was updated");
@@ -62,5 +60,13 @@ public class GroupCommunication {
                         null, new ParameterizedTypeReference<List<Group>>() {});
         List<Group> groups = responseEntity.getBody();
         return groups;
+    }
+
+    public void addUserToGroup(int userId, int groupId) {
+        restTemplate.put(URL+"/"+groupId+"/users/"+userId, null);
+    }
+
+    public void removeUserFromGroup(int userId, int groupId) {
+        restTemplate.delete(URL+"/"+groupId+"/users/"+userId);
     }
 }

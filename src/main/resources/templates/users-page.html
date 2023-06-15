@@ -20,6 +20,7 @@
 <table class="table">
     <thead>
         <tr>
+            <th>id</th>
             <th>name</th>
             <th>surname</th>
             <th>otchestvo</th>
@@ -33,6 +34,7 @@
     <tbody>
 
     <tr th:each="user: ${usersList}">
+        <td th:text = "${user.id}"></td>
         <td th:text = "${user.name}"></td>
         <td th:text = "${user.surname}"></td>
         <td th:text = "${user.otchestvo}"></td>
