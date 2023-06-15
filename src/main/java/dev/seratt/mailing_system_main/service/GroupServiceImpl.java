@@ -43,13 +43,12 @@ public class GroupServiceImpl implements GroupService {
     }
 
     @Override
-    public Set<User> getUsersByGroupId(int groupId) {
-        Group group = groupRepository.findById(groupId);
-        return group.getUsers();
+    public Group save(Group group) {
+        return groupRepository.save(group);
     }
 
     @Override
-    public Group save(Group group) {
-        return groupRepository.save(group);
+    public List<Group> getGroupsByUsersContaining(User user) {
+        return groupRepository.findGroupsByUsersContaining(user);
     }
 }

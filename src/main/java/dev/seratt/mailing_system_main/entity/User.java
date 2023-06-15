@@ -41,7 +41,7 @@ public class User {
     private Date dateOfCreation;
 
     @JsonIgnore
-    @ManyToMany(mappedBy = "users")
+    @ManyToMany(mappedBy = "users", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private Set<Group> groups = new HashSet<>();
 
     public User() {

@@ -1,6 +1,8 @@
 package dev.seratt.mailing_system_main.controller;
 
+import dev.seratt.mailing_system_main.entity.Group;
 import dev.seratt.mailing_system_main.entity.User;
+import dev.seratt.mailing_system_main.service.GroupService;
 import dev.seratt.mailing_system_main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +15,9 @@ import java.util.Set;
 public class UserRestController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private GroupService groupService;
 
     @GetMapping("/users")
     public List<User> getAllUsers(){
@@ -40,7 +45,8 @@ public class UserRestController {
 
     @DeleteMapping("/users/{id}")
     public String deleteUser(@PathVariable int id){
-
+        List <Group> groupsContainingUser = groupService.getGroupsByUsersContaining(userService.getUser(id));
+        groupsContainingUser.forEach(group -> group.removeUser(userService.getUser(id)));
         userService.deleteUser(id);
         return "User with ID = " + id + " was deleted";
 

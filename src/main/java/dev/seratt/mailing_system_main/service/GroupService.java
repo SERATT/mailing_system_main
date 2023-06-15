@@ -17,8 +17,7 @@ public interface GroupService {
     public void deleteGroup(int id);
 
     public Set<Group> search(String searchText);
-
-    public Set<User> getUsersByGroupId(int groupId);
-
     Group save(Group group);
+
+    public List<Group> getGroupsByUsersContaining(User user);
 }
