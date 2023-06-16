@@ -50,6 +50,10 @@
       </ul>
     </td>
     <td>
+      <form th:action="@{/spam/send_mail}" method="get">
+        <input type="hidden" name="id"  th:value = "${group.id}">
+        <input type="submit" value="Send mail">
+      </form>
       <form th:action="@{groups/save_update}" method="get">
         <input type="hidden" name="id"  th:value = "${group.id}">
         <input type="submit" value="Update">
