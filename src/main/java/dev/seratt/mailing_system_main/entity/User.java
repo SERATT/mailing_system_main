@@ -129,4 +129,11 @@ public class User {
     public void setGroups(Set<Group> groups) {
         this.groups = groups;
     }
+
+    @Override
+    public String toString() {
+        return "User: " +
+                "id=" + id +
+                ", email=" + email;
+    }
 }

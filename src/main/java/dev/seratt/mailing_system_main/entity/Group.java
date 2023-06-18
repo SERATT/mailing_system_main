@@ -1,11 +1,10 @@
 package dev.seratt.mailing_system_main.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.sql.Date;
-import java.util.List;
+
 import java.util.Set;
 
 @Entity
@@ -34,9 +33,9 @@ public class Group {
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
     private Set<User> users;
-
     public Group() {
     }
+
 
     public Group(int id, String title, String description, Date dateOfCreation) {
         this.id = id;

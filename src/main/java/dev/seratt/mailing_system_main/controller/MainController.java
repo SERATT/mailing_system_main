@@ -1,8 +1,10 @@
 package dev.seratt.mailing_system_main.controller;
 
 import dev.seratt.mailing_system_main.entity.Group;
+import dev.seratt.mailing_system_main.entity.Spam;
 import dev.seratt.mailing_system_main.entity.User;
 import dev.seratt.mailing_system_main.service.GroupService;
+import dev.seratt.mailing_system_main.service.SpamService;
 import dev.seratt.mailing_system_main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,8 @@ public class MainController {
     GroupService groupService;
     @Autowired
     UserService userService;
+    @Autowired
+    SpamService spamService;
     @GetMapping("/")
     public String mainPage(){
         return "main-page";
@@ -46,6 +50,12 @@ public class MainController {
         return "groups-page";
     }
 
+    @GetMapping("/mailing")
+    public String mailingPage(Model model){
+        model.addAttribute("spamsList", spamService.getAllSpams());
+        return "mailing-page";
+    }
+
     @GetMapping("/searchGroups")
     public String findGroupsBySearch(@RequestParam("searchText") String searchText,
                                      Model model){
@@ -55,5 +65,16 @@ public class MainController {
         Set<Group> groupsList = groupService.search(searchText);
         model.addAttribute("groupsList", groupsList);
         return "groups-page";
+    }
+
+    @GetMapping("/searchSpams")
+    public String findSpamsBySearch(@RequestParam("searchText") String searchText,
+                                     Model model){
+        if(searchText.isEmpty()){
+            return "redirect:/mailing";
+        }
+        Set<Spam> spamsList = spamService.search(searchText);
+        model.addAttribute("spamsList", spamsList);
+        return "mailing-page";
     }
 }

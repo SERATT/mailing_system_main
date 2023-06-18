@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rassylka</title>
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+          crossorigin="anonymous">
+</head>
+<body>
+<div>
+  <form class="form" th:action="@{/spam/save}" method = "post" th:modelAttribute="spam">
+    <input type="hidden" name="id" th:value="${spam.id}">
+    <input type="hidden" name="sendDate" th:value="${spam.sendDate}">
+    <input type="hidden" name="group" th:value="null">
+    theme <input type="text" name="letterTheme" th:value="${spam.letterTheme}"> <br> <br>
+    content <input type="text" name="letterContent" th:value="${spam.letterContent}"> <br> <br>
+    <input type="submit" value="Save">
+  </form>
+</div>
+<div class="d-flex justify-content-center">
+  <a href="/mailing">Back</a>
+</div>
+
+</body>
+</html>
