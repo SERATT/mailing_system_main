@@ -22,15 +22,24 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Group</th>
                 <th>Theme</th>
                 <th>Message</th>
                 <th>Date</th>
                 <th>Status Code</th>
+                <th>Group</th>
+                <th>Users</th>
             </tr>
         </thead>
         <tbody>
             <tr th:each = "spam: ${spamsList}">
+                <td th:text="${spam.letterTheme}"></td>
+                <td th:text="${spam.letterContent}"></td>
+                <td th:text="${spam.sendDate}"></td>
+                <td th:switch = "${spam.statusCode}">
+                    <div th:case="'G'" style="background-color: greenyellow">Succesful</div>
+                    <div th:case="'Y'" style="background-color: yellow">Partial</div>
+                    <div th:case="'R'" style="background-color: red">Failed</div>
+                </td>
                 <td>
                     <div th:each="group: ${spam.group}">
                         id <p th:text = "${spam.group.id}"></p>
@@ -38,10 +47,15 @@
                         description <p th:text = "${spam.group.description}"></p>
                     </div>
                 </td>
-                <td th:text="${spam.letterTheme}"></td>
-                <td th:text="${spam.letterContent}"></td>
-                <td th:text="${spam.sendDate}"></td>
-                <td th:text="${spam.statusCode}"></td>
+                <td>
+                    <div th:each="sentUser: ${spam.sentUsers}">
+                        <p th:text = "${sentUser.user}"></p>
+                        <span th:switch = "${sentUser.statusCode}">
+                            <div th:case="'G'" style="background-color: greenyellow">Succesful</div>
+                            <div th:case="'R'" style="background-color: red">Failed</div>
+                        </span>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>

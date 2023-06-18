@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "spam")
@@ -12,6 +14,9 @@ public class Spam {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
     private int id;
+
+    @OneToMany(mappedBy = "spam", cascade = CascadeType.ALL)
+    Set<SentUsers> sentUsers = new HashSet<>();
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id", referencedColumnName = "id")
@@ -97,5 +102,13 @@ public class Spam {
                 ", letterTheme='" + letterTheme + '\'' +
                 ", letterContent='" + letterContent + '\'' +
                 '}';
+    }
+
+    public Set<SentUsers> getSentUsers() {
+        return sentUsers;
+    }
+
+    public void setSentUsers(Set<SentUsers> sentUsers) {
+        this.sentUsers = sentUsers;
     }
 }
