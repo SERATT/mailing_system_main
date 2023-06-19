@@ -39,6 +39,7 @@ public class Group {
             inverseJoinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id")
     )
     private Set<User> users;
+
     public Group() {
     }
 

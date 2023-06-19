@@ -3,6 +3,7 @@ package dev.seratt.mailing_system_main.controller;
 import dev.seratt.mailing_system_main.entity.Group;
 import dev.seratt.mailing_system_main.service.GroupService;
 import dev.seratt.mailing_system_main.entity.User;
+import dev.seratt.mailing_system_main.service.SpamService;
 import dev.seratt.mailing_system_main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,9 @@ public class GroupRestController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private SpamService spamService;
 
     @GetMapping("/groups")
     public List<Group> getAllGroups(){
@@ -49,7 +53,7 @@ public class GroupRestController {
 
     @DeleteMapping("/groups/{id}")
     public String deleteGroup(@PathVariable int id){
-
+        spamService.deleteSpamsByGroup(groupService.getGroup(id));
         groupService.deleteGroup(id);
         return "Group with ID = " + id + " was deleted";
 
