@@ -1,14 +1,16 @@
 package dev.seratt.mailing_system_main.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import dev.seratt.mailing_system_main.entity.Group;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 
 import java.sql.Date;
 import java.util.HashSet;
-import java.util.List;
+
 import java.util.Set;
 
 @Entity
@@ -20,20 +22,35 @@ public class User {
     private int id;
 
     @Column(name = "name")
+    @NotBlank(message = "Name can not be empty")
+    @Size(min = 2, max = 25, message = "min 2 and max 25 characters")
     private String name;
 
     @Column(name = "surname")
+    @NotBlank(message = "Surname can not be empty")
+    @Size(min = 2, max = 25, message = "min 2 and max 25 characters")
     private String surname;
 
     @Column(name = "otchestvo")
+    @NotBlank(message = "Otchestvo can not be empty")
+    @Size(min = 2, max = 25, message = "min 2 and max 25 characters")
     private String otchestvo;
 
     @Column(name = "country")
+    @NotBlank(message = "Country can not be empty")
+    @Size(min = 2, max = 25, message = "Country min 2 and max 25 characters")
     private String country;
 
+
     @Column(name = "city")
+    @NotBlank(message = "City can not be empty")
+    @Size(min = 2, max = 25, message = "City min 2 and max 25 characters")
     private String city;
 
+    @Size(max = 100, message = "Email min 2 and max 200 characters")
+    @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
+            flags = Pattern.Flag.CASE_INSENSITIVE,
+            message = "Invalid email: does not match the pattern")
     @Column(name = "email")
     private String email;
 
