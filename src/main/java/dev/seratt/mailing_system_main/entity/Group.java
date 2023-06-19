@@ -2,6 +2,8 @@ package dev.seratt.mailing_system_main.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.sql.Date;
 
@@ -16,9 +18,13 @@ public class Group {
     private int id;
 
     @Column(name = "title")
+    @NotBlank(message = "Title can not be left blank")
+    @Size(min = 2, max = 25, message = "Title must be min 2 and max 25 characters")
     private String title;
 
     @Column(name = "description")
+    @NotBlank(message = "Description can not be left blank")
+    @Size(min = 2, message = "Description must be min 2 characters")
     private String description;
 
     @Column(name = "date_of_creation")

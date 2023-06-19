@@ -1,7 +1,8 @@
 package dev.seratt.mailing_system_main.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 import java.sql.Date;
 import java.util.HashSet;
@@ -28,8 +29,13 @@ public class Spam {
     @Column(name = "send_date")
     private Date sendDate;
 
+    @NotBlank(message = "Theme cannot be blank")
+    @Size(min = 2, max = 100, message = "Theme must be min 2 and max 100 characters")
     @Column(name = "letter_theme")
     private String letterTheme;
+
+    @NotBlank
+    @Size(min = 2, message = "Content must be min 2 characters")
     @Column(name = "letter_content")
     private String letterContent;
     public Spam() {

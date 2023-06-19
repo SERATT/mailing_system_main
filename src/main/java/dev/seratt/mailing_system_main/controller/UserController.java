@@ -31,7 +31,7 @@ public class UserController {
         return "user-form";
     }
     @PostMapping("/save")
-    public String saveUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model){
+    public String saveUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult){
         if(bindingResult.hasErrors()){
             return "user-form";
         }

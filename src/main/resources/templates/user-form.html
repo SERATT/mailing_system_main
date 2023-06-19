@@ -9,42 +9,45 @@
           crossorigin="anonymous">
 </head>
 <body>
-<div>
-    <form class="form" th:action="@{/users/save}" method = "post" th:modelAttribute = "user">
-        <div>
-            <input type="hidden" name="id" th:value = "${user.id}">
+<div style="width: 100vw; height: 100vh;" class="d-flex justify-content-center align-items-center">
+    <div style="width: 40%; height: 50%;" class="d-flex flex-column justify-content-center align-items-center">
+        <form class="flex" th:action="@{/users/save}" method = "post" th:modelAttribute = "user">
+            <div>
+                <input type="hidden" name="id" th:value = "${user.id}">
+            </div>
+            <div>
+                <input type="hidden" name="dateOfCreation" th:value = "${user.dateOfCreation}">
+            </div>
+            <div class="form-group">
+                name <br> <input style="width: 100%" type="text" name="name" th:value = "${user.name}">
+            </div>
+            <div class="form-group">
+                surname <br> <input style="width: 100%" type="text" name="surname" th:value = "${user.surname}">
+            </div>
+            <div class="form-group">
+                otchestvo <br> <input style="width: 100%" type="text" name="otchestvo" th:value = "${user.otchestvo}">
+            </div>
+            <div class="form-group">
+                country <br> <input style="width: 100%" type="text" name="country" th:value = "${user.country}">
+            </div>
+            <div class="form-group">
+                city <br> <input style="width: 100%" type="text" name="city" th:value = "${user.city}">
+            </div>
+            <div class="form-group">
+                email <br> <input style="width: 100%" type="text" name="email" th:value = "${user.email}">
+            </div>
+            <div class="form-group d-flex justify-content-center">
+                <input type="submit" value="Save" class="btn btn-success">
+            </div>
+            <ul>
+                <li th:each="err : ${#fields.errors('user.*')}" th:text="${err}" />
+            </ul>
+        </form>
+        <div class="d-flex justify-content-center">
+            <a href="/users" class="btn btn-dark">Back</a>
         </div>
-        <div>
-            <input type="hidden" name="dateOfCreation" th:value = "${user.dateOfCreation}">
-        </div>
-        <div>
-            name <input type="text" name="name" th:value = "${user.name}"> <br> <br>
-        </div>
-        <div>
-            surname <input type="text" name="surname" th:value = "${user.surname}"> <br> <br>
-        </div>
-        <div>
-            otchestvo <input type="text" name="otchestvo" th:value = "${user.otchestvo}"> <br> <br>
-        </div>
-        <div>
-            country <input type="text" name="country" th:value = "${user.country}"> <br> <br>
-        </div>
-        <div>
-            city <input type="text" name="city" th:value = "${user.city}"> <br> <br>
-        </div>
-        <div>
-            email <input type="text" name="email" th:value = "${user.email}"> <br> <br>
-        </div>
-        <div>
-            <input type="submit" value="Save">
-        </div>
-        <ul>
-            <li th:each="err : ${#fields.errors('user.*')}" th:text="${err}" />
-        </ul>
-    </form>
+    </div>
 </div>
-<div class="d-flex justify-content-center">
-    <a href="/users">Back</a>
-</div>
+
 </body>
 </html>

@@ -4,9 +4,11 @@ import dev.seratt.mailing_system_main.communication.GroupCommunication;
 import dev.seratt.mailing_system_main.communication.SpamCommunication;
 import dev.seratt.mailing_system_main.entity.Group;
 import dev.seratt.mailing_system_main.entity.Spam;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -39,7 +41,10 @@ public class SpamController {
     }
 
     @PostMapping("/save")
-    public String saveSpam(@ModelAttribute Spam spam){
+    public String saveSpam(@ModelAttribute @Valid Spam spam, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "spam-form";
+        }
         spamCommunication.saveSpam(spam, this.groupId);
         return "redirect:/mailing";
     }

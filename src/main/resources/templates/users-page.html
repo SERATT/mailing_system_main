@@ -13,10 +13,17 @@
 <div class="input-group d-flex justify-content-center">
     <form th:action="@{searchUsers}" method="get" th:modelAttribute = "usersList">
         <input type="text" name = "searchText"/>
-        <input type="submit">
+        <input type="submit" value="Search" class="btn btn-dark">
     </form>
 </div>
-<br> <br>
+<br>
+<div class = "d-flex justify-content-center">
+    <form th:action="@{/users/save_update}">
+        <input type="hidden" name="id" th:value = "0">
+        <input type="submit" value="Create" class="btn btn-success">
+    </form>
+</div>
+<br>
 <table class="table">
     <thead>
         <tr>
@@ -45,27 +52,22 @@
         <td>
             <form th:action="@{/users/save_update}" method="get">
                 <input type="hidden" name="id"  th:value = "${user.id}">
-                <input type="submit" value="Update">
+                <input type="submit" value="Update" class="btn btn-primary">
             </form>
+            <br>
             <form th:action="@{/users/delete}">
                 <input type="hidden" name="id" th:value = "${user.id}">
-                <input type="submit" value="Delete">
+                <input type="submit" value="Delete" class="btn btn-danger">
             </form>
         </td>
     </tr>
 
     </tbody>
 </table>
-<div class = "d-flex justify-content-center">
-    <form th:action="@{/users/save_update}">
-        <input type="hidden" name="id" th:value = "0">
-        <input class="ui-button" type="submit" value="Create">
-    </form>
-</div>
 <br>
 <br>
 <div class="d-flex justify-content-center">
-    <a href="/">Main Page</a>
+    <a href="/" class="btn btn-dark">Main Page</a>
 </div>
 </body>
 </html>

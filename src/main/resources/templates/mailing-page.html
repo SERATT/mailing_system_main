@@ -14,7 +14,7 @@
 <div class="input-group d-flex justify-content-center">
     <form th:action="@{searchSpams}" method="get" th:modelAttribute = "spamsList">
         <input type="text" name = "searchText"/>
-        <input type="submit">
+        <input class="btn btn-dark" type="submit" value="Search">
     </form>
 </div>
 <br>
@@ -62,7 +62,8 @@
 <br>
 <br>
 <div class="d-flex justify-content-center">
-    <a href="/">Main Page</a>
+    <a href="/" class="btn btn-dark">Main Page</a>
 </div>
+<br>
 </body>
 </html>
