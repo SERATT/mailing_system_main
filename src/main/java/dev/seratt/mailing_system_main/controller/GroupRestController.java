@@ -74,7 +74,7 @@ public class GroupRestController {
         Group group = groupService.getGroup(groupId);
         User user = userService.getUser(userId);
         if(user == null){
-            throw new UserNotFoundException("User Not Found");
+            throw new UserNotFoundException("User with id " + userId + " was Not Found");
         }
         group.addUser(user);
         return groupService.save(group);
@@ -84,6 +84,9 @@ public class GroupRestController {
     Group removeUserFromGroup(@PathVariable int groupId, @PathVariable int userId){
         Group group = groupService.getGroup(groupId);
         User user = userService.getUser(userId);
+        if(user == null){
+            throw new UserNotFoundException("User with id " + userId + " was Not Found");
+        }
         group.removeUser(user);
         return groupService.save(group);
     }
