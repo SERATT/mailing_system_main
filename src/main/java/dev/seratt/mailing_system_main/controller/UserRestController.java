@@ -3,6 +3,7 @@ package dev.seratt.mailing_system_main.controller;
 import dev.seratt.mailing_system_main.entity.Group;
 import dev.seratt.mailing_system_main.entity.User;
 import dev.seratt.mailing_system_main.service.GroupService;
+import dev.seratt.mailing_system_main.service.SpamService;
 import dev.seratt.mailing_system_main.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,9 @@ public class UserRestController {
 
     @Autowired
     private GroupService groupService;
+
+    @Autowired
+    SpamService spamService;
 
     @GetMapping("/users")
     public List<User> getAllUsers(){
