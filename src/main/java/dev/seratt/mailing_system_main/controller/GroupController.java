@@ -1,6 +1,7 @@
 package dev.seratt.mailing_system_main.controller;
 
 import dev.seratt.mailing_system_main.communication.GroupCommunication;
+import dev.seratt.mailing_system_main.communication.UserCommunication;
 import dev.seratt.mailing_system_main.entity.Group;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import java.sql.Date;
 public class GroupController {
     @Autowired
     GroupCommunication groupCommunication;
+    @Autowired
+    UserCommunication userCommunication;
     @GetMapping("/save_update")
     public String updateGroup(@RequestParam("id") int id, Model model){
         Group group;
@@ -50,8 +53,18 @@ public class GroupController {
     }
 
     @GetMapping("/addUser")
-    public String addUserToGroup(@RequestParam("userId") int userId, @RequestParam("groupId") int groupId){
-        groupCommunication.addUserToGroup(userId, groupId);
+    public String addUserToGroup(@RequestParam("userId") String userIdStr, @RequestParam("groupId") int groupId, Model model){
+        int userId;
+        try{
+            userId = Integer.parseInt(userIdStr);
+            groupCommunication.addUserToGroup(userId, groupId);
+        } catch (Exception ex){
+            model.addAttribute("groupId", groupId);
+            model.addAttribute("usersList", userCommunication.getAllUsers());
+
+            return "choose-user";
+        }
+
         return "redirect:/groups";
     }
 
