@@ -9,10 +9,18 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 public class Handler {
-    @ExceptionHandler
+    @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<InvalidDataInfo> handleException(UserNotFoundException exception){
         InvalidDataInfo info = new InvalidDataInfo("Bad request: " +
                 exception.getMessage());
         return new ResponseEntity<>(info, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler
+    public ResponseEntity<InvalidDataInfo> handleOtherException(Exception exception){
+        InvalidDataInfo info = new InvalidDataInfo(exception.getMessage());
+        return new ResponseEntity<>(info, HttpStatus.BAD_REQUEST);
+    }
+
+
 }
