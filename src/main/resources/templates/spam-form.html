@@ -9,18 +9,30 @@
           crossorigin="anonymous">
 </head>
 <body>
-<div>
-  <form class="form" th:action="@{/spam/save}" method = "post" th:modelAttribute="spam">
-    <input type="hidden" name="id" th:value="${spam.id}">
-    <input type="hidden" name="sendDate" th:value="${spam.sendDate}">
-    <input type="hidden" name="group" th:value="null">
-    theme <input type="text" name="letterTheme" th:value="${spam.letterTheme}"> <br> <br>
-    content <input type="text" name="letterContent" th:value="${spam.letterContent}"> <br> <br>
-    <input type="submit" value="Save">
-  </form>
+<div style="width: 100vw; height: 100vh;" class="d-flex justify-content-center align-items-center">
+    <div style="width: 40%; height: 50%;" class="d-flex flex-column justify-content-center align-items-center">
+          <form class="form" th:action="@{/spam/save}" method = "post" th:modelAttribute="spam">
+              <input type="hidden" name="id" th:value="${spam.id}">
+              <input type="hidden" name="sendDate" th:value="${spam.sendDate}">
+              <input type="hidden" name="group" th:value="null">
+              <div class="form-group">
+                  theme <br> <input type="text" name="letterTheme" th:value="${spam.letterTheme}">
+              </div>
+              <div class="form-group">
+                  content <br> <input  type="text" name="letterContent" th:value="${spam.letterContent}">
+              </div>
+              <div class="form-group d-flex justify-content-center">
+                  <input type="submit" value="Save" class="btn btn-warning">
+              </div>
+              <ul>
+                  <li th:each="err : ${#fields.errors('spam.*')}" th:text="${err}" />
+              </ul>
+
+          </form>
+    </div>
 </div>
 <div class="d-flex justify-content-center">
-  <a href="/mailing">Back</a>
+  <a href="/mailing">Mailing History</a>
 </div>
 
 </body>

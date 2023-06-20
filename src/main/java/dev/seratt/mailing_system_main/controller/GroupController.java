@@ -2,9 +2,11 @@ package dev.seratt.mailing_system_main.controller;
 
 import dev.seratt.mailing_system_main.communication.GroupCommunication;
 import dev.seratt.mailing_system_main.entity.Group;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -27,7 +29,10 @@ public class GroupController {
         return "group-form";
     }
     @PostMapping("/save")
-    public String saveGroup(@ModelAttribute("group") Group group){
+    public String saveGroup(@ModelAttribute("group") @Valid Group group, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "group-form";
+        }
         groupCommunication.saveGroup(group);
         return "redirect:/groups";
     }

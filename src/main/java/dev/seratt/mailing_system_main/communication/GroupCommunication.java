@@ -51,7 +51,6 @@ public class GroupCommunication {
 
     public void deleteGroup(int id){
         restTemplate.delete(URL+"/"+id);
-        System.out.println("Group with id " + id + " was deleted");
     }
 
     public List<Group> findGroupsBySearch(String searchText) {

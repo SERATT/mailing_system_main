@@ -2,9 +2,12 @@ package dev.seratt.mailing_system_main.controller;
 
 import dev.seratt.mailing_system_main.communication.UserCommunication;
 import dev.seratt.mailing_system_main.entity.User;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
@@ -28,7 +31,10 @@ public class UserController {
         return "user-form";
     }
     @PostMapping("/save")
-    public String saveUser(@ModelAttribute("user") User user){
+    public String saveUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult){
+        if(bindingResult.hasErrors()){
+            return "user-form";
+        }
         userCommunication.saveUser(user);
         return "redirect:/users";
     }

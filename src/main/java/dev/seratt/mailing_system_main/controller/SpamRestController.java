@@ -67,8 +67,6 @@ public class SpamRestController {
         if(sent == 0){
             spam.setStatusCode('R');
         }
-        System.out.println(spam);
-        System.out.println(spam.getSentUsers());
         spamService.saveSpam(spam);
     }
 

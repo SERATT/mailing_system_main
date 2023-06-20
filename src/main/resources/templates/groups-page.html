@@ -14,10 +14,16 @@
 <div class="input-group d-flex justify-content-center">
   <form th:action="@{searchGroups}" method="get" th:modelAttribute = "groupsList">
     <input type="text" name = "searchText"/>
-    <input type="submit">
+    <input class="btn btn-dark" type="submit" value="search">
   </form>
 </div>
 <br>
+<div class="d-flex justify-content-center">
+  <form th:action="@{/groups/save_update}">
+    <input type="hidden" name="id" th:value = "0">
+    <input class="btn btn-success" type="submit" value="Create">
+  </form>
+</div>
 <br>
 <table class="table">
   <thead>
@@ -40,10 +46,6 @@
         <li th:each="user: ${group.users}">
           id <p th:text = "${user.id}"></p>
           name <p th:text = "${user.name}"></p>
-          surname <p th:text = "${user.surname}"></p>
-          otchestvo <p th:text = "${user.otchestvo}"></p>
-          country <p th:text = "${user.country}"></p>
-          city <p th:text = "${user.city}"></p>
           email <p th:text = "${user.email}"></p>
         </li>
 
@@ -52,41 +54,38 @@
     <td>
       <form th:action="@{/spam/send_mail}" method="get">
         <input type="hidden" name="id"  th:value = "${group.id}">
-        <input type="submit" value="Send mail">
+        <input type="submit" value="Send mail" class="btn btn-warning">
       </form>
+      <br>
       <form th:action="@{groups/save_update}" method="get">
         <input type="hidden" name="id"  th:value = "${group.id}">
-        <input type="submit" value="Update">
+        <input type="submit" value="Update" class="btn btn-primary">
       </form>
+      <br>
       <form th:action="@{/groups/delete}">
         <input type="hidden" name="id" th:value = "${group.id}">
-        <input type="submit" value="Delete">
+        <input type="submit" value="Delete" class="btn btn-danger">
       </form>
+      <br>
+      <p>User List Actions</p>
       <form th:action="@{groups/addUser}" method="get">
         <input type="hidden" name="groupId"  th:value = "${group.id}">
         <input type="text" name="userId"  placeholder="Type id of user you want to add">
-        <input type="submit" value="Add User">
+        <input type="submit" value="Add User" class="btn btn-success">
       </form>
+      <br>
       <form th:action="@{groups/removeUser}" method="get">
         <input type="hidden" name="groupId"  th:value = "${group.id}">
         <input type="text" name="userId"  placeholder="Type id of user you want to remove">
-        <input type="submit" value="Remove User">
+        <input type="submit" value="Remove User" class="btn btn-danger">
       </form>
     </td>
   </tr>
-
   </tbody>
 </table>
-<div class="d-flex justify-content-center">
-  <form th:action="@{/groups/save_update}">
-    <input type="hidden" name="id" th:value = "0">
-    <input class="ui-button" type="submit" value="Create">
-  </form>
-</div>
-<br>
 <br>
 <div class="d-flex justify-content-center">
-  <a href="/">Main Page</a>
+  <a href="/" class="btn btn-dark">Main Page</a>
 </div>
 </body>
 </html>
