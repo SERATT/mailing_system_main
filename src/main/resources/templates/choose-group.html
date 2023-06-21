@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Group</title>
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+</head>
+<body>
+<div style="width: 100vw; height: 100vh;" class="d-flex justify-content-center align-items-center">
+    <div style="width: 40%; height: 50%;" class="d-flex flex-column justify-content-center align-items-center">
+        <form class="form" th:action="@{/spam/send_mail}" method="get">
+            <div class="form-group" th:each = "group: ${groupsList}">
+                <input required type="radio" name="groupId" th:value="${group.id}"> <br>
+                Title <p th:text="${group.title}"> </p>
+                Description <p th:text="${group.description}"> </p>
+            </div>
+            <div class="form-group d-flex justify-content-center">
+                <input type="submit" value="Send Email" class="btn btn-success">
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
