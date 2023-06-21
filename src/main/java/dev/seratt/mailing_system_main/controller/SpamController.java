@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/spam")
@@ -23,16 +24,15 @@ public class SpamController {
 
     private int groupId;
 
-    @GetMapping("/save_update")
-    public String goSpamForm(@RequestParam("id") int id, Model model){
-        Spam spam = new Spam();
-        spam.setSendDate(new Date(System.currentTimeMillis()));
-        model.addAttribute("spam", spam);
-        return "spam-form";
+    @GetMapping("/create")
+    public String goToChooseGroup(Model model){
+        List<Group> groupsList = groupCommunication.getAllGroups();
+        model.addAttribute("groupsList", groupsList);
+        return "choose-group";
     }
 
     @GetMapping("/send_mail")
-    public String sendEmail(@RequestParam("id") int groupId, Model model){
+    public String sendEmail(@RequestParam("groupId") int groupId, Model model){
         Spam spam = new Spam();
         spam.setSendDate(new Date(System.currentTimeMillis()));
         model.addAttribute("spam", spam);

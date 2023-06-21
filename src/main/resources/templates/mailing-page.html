@@ -17,6 +17,11 @@
         <input class="btn btn-dark" type="submit" value="Search">
     </form>
 </div>
+<div class="input-group d-flex justify-content-center">
+    <form th:action="@{/spam/create}" method="get" th:modelAttribute = "spamsList">
+        <input class="btn btn-dark" type="submit" value="Create">
+    </form>
+</div>
 <br>
 <br>
     <table class="table">

@@ -73,6 +73,4 @@ public class GroupController {
         groupCommunication.removeUserFromGroup(userId, groupId);
         return "redirect:/groups";
     }
-
-
 }
