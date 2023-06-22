@@ -45,8 +45,8 @@
         <td th:text = "${user.name}"></td>
         <td th:text = "${user.surname}"></td>
         <td th:text = "${user.otchestvo}"></td>
-        <td th:text = "${user.country}"></td>
-        <td th:text = "${user.city}"></td>
+        <td th:text = "${user.country.toString()}"></td>
+        <td th:text = "${user.city.toString()}"></td>
         <td th:text = "${user.email}"></td>
         <td th:text = "${user.dateOfCreation}"></td>
         <td>

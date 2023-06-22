@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
     @Override
     public Set<User> search(String searchText){
         return userRepository
-                .findUsersByNameContainingIgnoreCaseOrSurnameContainingIgnoreCaseOrOtchestvoContainingIgnoreCaseOrCountryContainingIgnoreCaseOrCityContainingIgnoreCase(
-                    searchText, searchText, searchText, searchText, searchText
+                .findUsersByNameContainingIgnoreCaseOrSurnameContainingIgnoreCaseOrOtchestvoContainingIgnoreCaseOrEmailContainingIgnoreCase(
+                    searchText, searchText, searchText, searchText
                 );
     }
 

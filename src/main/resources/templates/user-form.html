@@ -7,6 +7,7 @@
           href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 <body>
 <div style="width: 100vw; height: 100vh;" class="d-flex justify-content-center align-items-center">
@@ -27,11 +28,23 @@
             <div class="form-group">
                 otchestvo <br> <input style="width: 100%" type="text" name="otchestvo" th:value = "${user.otchestvo}">
             </div>
+            <div>
+                country
+            </div>
+<!--            <div class="form-group" th:each="country : ${countryList}">-->
+<!--                <input required type="radio" name="country" th:value = "${country}" th:text="${country}">-->
+<!--            </div>-->
             <div class="form-group">
-                country <br> <input style="width: 100%" type="text" name="country" th:value = "${user.country}">
+                <select name="countryId" class="countrySelect" onchange="updateCitiesList()">
+                    <option th:each="country : ${countryList}" th:value="${country.id}" th:text="${country.name}"
+                            th:selected="${country==user.country}"></option>
+                </select>
+            </div>
+            <div>
+                city
             </div>
             <div class="form-group">
-                city <br> <input style="width: 100%" type="text" name="city" th:value = "${user.city}">
+                <select name="cityId" class="city-selection"></select>
             </div>
             <div class="form-group">
                 email <br> <input style="width: 100%" type="text" name="email" th:value = "${user.email}">
@@ -39,7 +52,7 @@
             <div class="form-group d-flex justify-content-center">
                 <input type="submit" value="Save" class="btn btn-success">
             </div>
-            <div class="form-group d-flex justify-content-center">
+            <div class="form-group d-flex justify-content-center" th:if="${email_error_message == null}">
                 Error: <p th:text="${email_error_message}"></p>
             </div>
             <ul>
@@ -51,6 +64,28 @@
         </div>
     </div>
 </div>
-
+<script>
+    function updateCitiesList() {
+        const countrySelect = document.querySelector(".countrySelect")
+        const countryId = countrySelect.value
+        const citySelect = document.querySelector(".city-selection")
+        // console.log(countryId)
+        // let jsonResponse = fetch("http://localhost:8080/api/country/"+countryId+"/getCitiesByCountry").then(response => response.json())
+        $.ajax({
+            type: "GET",
+            url: "http://localhost:8080/api/country/" + countryId + "/getCitiesByCountry",
+            success: function (result) {
+                while (citySelect.hasChildNodes()) {
+                    citySelect.firstChild.remove()
+                }
+                let i
+                for (i of result) {
+                    $('.city-selection').append("<option value=\"" + i.id + "\">"+i.name+"</option>")
+                    console.log(i.id)
+                }
+            }
+        });
+    }
+</script>
 </body>
 </html>

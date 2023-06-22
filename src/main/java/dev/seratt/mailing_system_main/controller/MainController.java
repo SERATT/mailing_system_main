@@ -1,18 +1,16 @@
 package dev.seratt.mailing_system_main.controller;
 
-import dev.seratt.mailing_system_main.entity.Group;
-import dev.seratt.mailing_system_main.entity.Spam;
-import dev.seratt.mailing_system_main.entity.User;
-import dev.seratt.mailing_system_main.service.GroupService;
-import dev.seratt.mailing_system_main.service.SpamService;
-import dev.seratt.mailing_system_main.service.UserService;
+import dev.seratt.mailing_system_main.entity.*;
+import dev.seratt.mailing_system_main.service.*;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -23,6 +21,10 @@ public class MainController {
     UserService userService;
     @Autowired
     SpamService spamService;
+    @Autowired
+    CountryService countryService;
+    @Autowired
+    CityService cityService;
     @GetMapping("/")
     public String mainPage(){
         return "main-page";
@@ -101,4 +103,6 @@ public class MainController {
         model.addAttribute("spamsList", spamsList);
         return "mailing-page";
     }
+
+
 }
