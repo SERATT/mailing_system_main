@@ -7,8 +7,8 @@ import java.util.Set;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
     public Set<User>
-        findUsersByNameContainingIgnoreCaseOrSurnameContainingIgnoreCaseOrOtchestvoContainingIgnoreCaseOrCountryContainingIgnoreCaseOrCityContainingIgnoreCase
-        (String name, String surname, String otchestvo, String country, String city);
+        findUsersByNameContainingIgnoreCaseOrSurnameContainingIgnoreCaseOrOtchestvoContainingIgnoreCaseOrEmailContainingIgnoreCase
+        (String name, String surname, String otchestvo, String email);
 
     public User findById(int id);
 

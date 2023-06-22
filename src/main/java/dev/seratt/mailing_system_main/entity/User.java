@@ -35,16 +35,14 @@ public class User {
     @Size(min = 2, max = 25, message = "min 2 and max 25 characters")
     private String otchestvo;
 
-    @Column(name = "country")
-    @NotBlank(message = "Country can not be empty")
-    @Size(min = 2, max = 25, message = "Country min 2 and max 25 characters")
-    private String country;
+    @ManyToOne
+    @JoinColumn(name = "country_id")
+    private Country country;
 
+    @ManyToOne
+    @JoinColumn(name = "city_id")
+    private City city;
 
-    @Column(name = "city")
-    @NotBlank(message = "City can not be empty")
-    @Size(min = 2, max = 25, message = "City min 2 and max 25 characters")
-    private String city;
 
     @Size(max = 100, message = "Email max 100 characters")
     @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
@@ -67,7 +65,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, String surname, String otchestvo, String country, String city, String email, Date dateOfCreation) {
+    public User(int id, String name, String surname, String otchestvo, Country country, City city, String email, Date dateOfCreation) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -110,19 +108,19 @@ public class User {
         this.otchestvo = otchestvo;
     }
 
-    public String getCountry() {
+    public Country getCountry() {
         return country;
     }
 
-    public void setCountry(String country) {
+    public void setCountry(Country country) {
         this.country = country;
     }
 
-    public String getCity() {
+    public City getCity() {
         return city;
     }
 
-    public void setCity(String city) {
+    public void setCity(City city) {
         this.city = city;
     }
 
