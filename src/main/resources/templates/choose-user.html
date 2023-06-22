@@ -11,10 +11,15 @@
 <body>
 <div style="width: 100vw; height: 100vh;" class="d-flex justify-content-center align-items-center">
     <div style="width: 40%; height: 50%;" class="d-flex flex-column justify-content-center align-items-center">
+        <form th:action="@{/searchUsersForAdding}" method="get" th:modelAttribute = "usersList">
+            <input type="text" name = "searchText"/>
+            <input type="hidden" name="groupId"  th:value = "${groupId}">
+            <input class="btn btn-dark" type="submit" value="search">
+        </form>
         <form class="form" th:action="@{/groups/addUser}" method="get">
             <input type="hidden" name="groupId"  th:value = "${groupId}">
             <div class="form-group" th:each = "user: ${usersList}">
-                <input type="radio" name="userId" th:value="${user.id}"> <br>
+                <input type="radio" required name="userId" th:value="${user.id}"> <br>
                 Name <p th:text="${user.name}"></p>
                 Email <p th:text="${user.email}"></p>
             </div>

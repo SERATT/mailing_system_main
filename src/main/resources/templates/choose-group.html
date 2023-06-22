@@ -11,6 +11,10 @@
 <body>
 <div style="width: 100vw; height: 100vh;" class="d-flex justify-content-center align-items-center">
     <div style="width: 40%; height: 50%;" class="d-flex flex-column justify-content-center align-items-center">
+        <form th:action="@{/searchGroupsForAdding}" method="get">
+            <input type="text" name = "searchText"/>
+            <input class="btn btn-dark" type="submit" value="search">
+        </form>
         <form class="form" th:action="@{/spam/send_mail}" method="get">
             <div class="form-group" th:each = "group: ${groupsList}">
                 <input required type="radio" name="groupId" th:value="${group.id}"> <br>

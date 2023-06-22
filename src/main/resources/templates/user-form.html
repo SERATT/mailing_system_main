@@ -39,6 +39,9 @@
             <div class="form-group d-flex justify-content-center">
                 <input type="submit" value="Save" class="btn btn-success">
             </div>
+            <div class="form-group d-flex justify-content-center">
+                Error: <p th:text="${email_error_message}"></p>
+            </div>
             <ul>
                 <li th:each="err : ${#fields.errors('user.*')}" th:text="${err}" />
             </ul>
