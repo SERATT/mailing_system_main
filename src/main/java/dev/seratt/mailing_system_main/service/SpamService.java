@@ -9,7 +9,7 @@ import java.util.Set;
 public interface SpamService {
     public List<Spam> getAllSpams();
 
-    public void saveSpam(Spam spam);
+    public void saveSpam(Spam spam, Group group);
 
     public Spam getSpam(int id);
 

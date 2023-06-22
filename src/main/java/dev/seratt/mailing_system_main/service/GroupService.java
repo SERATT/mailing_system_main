@@ -20,4 +20,8 @@ public interface GroupService {
     Group save(Group group);
 
     public List<Group> getGroupsByUsersContaining(User user);
+
+    public void addUserToGroup(User user, Group group);
+
+    public void removeUserFromGroup(User user, Group group);
 }

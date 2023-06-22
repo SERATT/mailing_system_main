@@ -10,7 +10,6 @@ import jakarta.validation.constraints.Size;
 
 import java.sql.Date;
 import java.util.HashSet;
-
 import java.util.Set;
 
 @Entity
@@ -19,7 +18,6 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column
-    @NotBlank
     private int id;
 
     @Column(name = "name")
@@ -48,7 +46,7 @@ public class User {
     @Size(min = 2, max = 25, message = "City min 2 and max 25 characters")
     private String city;
 
-    @Size(max = 100, message = "Email min 2 and max 200 characters")
+    @Size(max = 100, message = "Email max 100 characters")
     @Email(regexp = "[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}",
             flags = Pattern.Flag.CASE_INSENSITIVE,
             message = "Invalid email: does not match the pattern")

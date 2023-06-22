@@ -51,4 +51,16 @@ public class GroupServiceImpl implements GroupService {
     public List<Group> getGroupsByUsersContaining(User user) {
         return groupRepository.findGroupsByUsersContaining(user);
     }
+
+    @Override
+    public void addUserToGroup(User user, Group group) {
+        group.addUser(user);
+        save(group);
+    }
+
+    @Override
+    public void removeUserFromGroup(User user, Group group) {
+        group.removeUser(user);
+        save(group);
+    }
 }

@@ -21,7 +21,5 @@ public interface GroupRepository extends JpaRepository<Group, Integer> {
 
     public List<Group> findGroupsByUsersContaining(User user);
 
-//    @Query(value = "select user from users join (select * from users_and_groups where group_id = ?1) as joint",
-//    nativeQuery = true)
-//    List<User> findUsersOfGroup(int groupId);
+
 }

@@ -16,4 +16,7 @@ public interface UserService {
     public void deleteUser(int id);
 
     public Set<User> search(String searchText);
+
+    public boolean checkEmailUniqueness(String email);
+
 }
