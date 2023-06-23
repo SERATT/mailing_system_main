@@ -5,6 +5,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -27,7 +29,7 @@ public class Spam {
     private char statusCode;
 
     @Column(name = "send_date")
-    private Date sendDate;
+    private Timestamp sendDate;
 
     @NotBlank(message = "Theme cannot be blank")
     @Size(min = 2, max = 100, message = "Theme must be min 2 and max 100 characters")
@@ -41,7 +43,7 @@ public class Spam {
     public Spam() {
     }
 
-    public Spam(int id, Group group, char statusCode, Date sendDate, String letterTheme, String letterContent) {
+    public Spam(int id, Group group, char statusCode, Timestamp sendDate, String letterTheme, String letterContent) {
         this.id = id;
         this.group = group;
         this.statusCode = statusCode;
@@ -74,11 +76,11 @@ public class Spam {
         this.statusCode = statusCode;
     }
 
-    public Date getSendDate() {
+    public Timestamp getSendDate() {
         return sendDate;
     }
 
-    public void setSendDate(Date sendDate) {
+    public void setSendDate(Timestamp sendDate) {
         this.sendDate = sendDate;
     }
 

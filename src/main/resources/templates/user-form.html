@@ -12,6 +12,9 @@
 <body>
 <div style="width: 100vw; height: 100vh;" class="d-flex justify-content-center align-items-center">
     <div style="width: 40%; height: 50%;" class="d-flex flex-column justify-content-center align-items-center">
+        <div>
+            <p style="display: none" class="user-city" th:text = "${user.city}">
+        </div>
         <form class="flex" th:action="@{/users/save}" method = "post" th:modelAttribute = "user">
             <div>
                 <input type="hidden" name="id" th:value = "${user.id}">
@@ -26,7 +29,7 @@
                 surname <br> <input style="width: 100%" type="text" name="surname" th:value = "${user.surname}">
             </div>
             <div class="form-group">
-                otchestvo <br> <input style="width: 100%" type="text" name="otchestvo" th:value = "${user.otchestvo}">
+                patronymic <br> <input style="width: 100%" type="text" name="otchestvo" th:value = "${user.otchestvo}">
             </div>
             <div>
                 country
@@ -65,12 +68,13 @@
     </div>
 </div>
 <script>
+
     function updateCitiesList() {
         const countrySelect = document.querySelector(".countrySelect")
         const countryId = countrySelect.value
         const citySelect = document.querySelector(".city-selection")
-        // console.log(countryId)
-        // let jsonResponse = fetch("http://localhost:8080/api/country/"+countryId+"/getCitiesByCountry").then(response => response.json())
+        const city = document.querySelector(".user-city").textContent
+        console.log(city)
         $.ajax({
             type: "GET",
             url: "http://localhost:8080/api/country/" + countryId + "/getCitiesByCountry",
@@ -80,12 +84,23 @@
                 }
                 let i
                 for (i of result) {
-                    $('.city-selection').append("<option value=\"" + i.id + "\">"+i.name+"</option>")
-                    console.log(i.id)
+                    $('.city-selection').append("<option class='city-selection-child' value=\"" + i.id + "\">"+i.name+"</option>")
+                }
+                let options = document.getElementsByClassName('city-selection-child')
+                let iter = 0
+                while (iter < options.length){
+                    if(options[iter].textContent === city){
+                        options[iter].setAttribute('selected', 'selected')
+                        return
+                    }
+                    iter++
                 }
             }
         });
     }
+    $(document).ready(function(){
+        updateCitiesList()
+    })
 </script>
 </body>
 </html>

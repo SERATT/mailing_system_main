@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Set;
 
 @Entity
@@ -27,7 +29,7 @@ public class Group {
     private String description;
 
     @Column(name = "date_of_creation")
-    private Date dateOfCreation;
+    private Timestamp dateOfCreation;
 
     @JsonIgnore
     @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE,
@@ -43,7 +45,7 @@ public class Group {
     }
 
 
-    public Group(int id, String title, String description, Date dateOfCreation) {
+    public Group(int id, String title, String description, Timestamp dateOfCreation) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -74,11 +76,11 @@ public class Group {
         this.description = description;
     }
 
-    public Date getDateOfCreation() {
+    public Timestamp getDateOfCreation() {
         return dateOfCreation;
     }
 
-    public void setDateOfCreation(Date dateOfCreation) {
+    public void setDateOfCreation(Timestamp dateOfCreation) {
         this.dateOfCreation = dateOfCreation;
     }
 

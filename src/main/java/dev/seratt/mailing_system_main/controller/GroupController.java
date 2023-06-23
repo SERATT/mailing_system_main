@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Controller
 @RequestMapping("/groups")
@@ -29,7 +30,7 @@ public class GroupController {
         Group group;
         if(id == 0){
             group = new Group();
-            group.setDateOfCreation(new Date(System.currentTimeMillis()));
+            group.setDateOfCreation(new Timestamp(System.currentTimeMillis()));
         } else {
             group = groupService.getGroup(id);
         }

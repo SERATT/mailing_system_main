@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Controller
@@ -37,25 +38,22 @@ public class UserController {
         User user;
         if(id == 0){
             user = new User();
-            user.setDateOfCreation(new Date(System.currentTimeMillis()));
+            user.setDateOfCreation(new Timestamp(System.currentTimeMillis()));
         } else {
             user = userService.getUser(id);
         }
         model.addAttribute("user", user);
         model.addAttribute("countryList", countryService.getAllCountries());
-        System.out.println(countryService.getAllCountries());
         return "user-form";
     }
     @PostMapping(value = "/save")
     public String saveUser(@ModelAttribute("user") @Valid UserForm userForm, BindingResult bindingResult, Model model){
-        System.out.println(userForm);
         if(bindingResult.hasErrors()){
             return "user-form";
 
         }
         String email = userForm.getEmail();
         if(!userService.checkEmailUniqueness(email) && userForm.getId() == 0){
-            System.out.println("this");
             model.addAttribute("email_error_message", "Email is not unique");
             return "user-form";
         }
@@ -63,7 +61,7 @@ public class UserController {
         User user;
         if(userForm.getId() == 0){
             user = new User();
-            user.setDateOfCreation(new Date(System.currentTimeMillis()));
+            user.setDateOfCreation(new Timestamp(System.currentTimeMillis()));
         } else {
             user = userService.getUser(userForm.getId());
         }

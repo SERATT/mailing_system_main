@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -52,7 +53,7 @@ public class User {
     private String email;
 
     @Column(name = "date_of_creation")
-    private Date dateOfCreation;
+    private Timestamp dateOfCreation;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "users", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -65,7 +66,7 @@ public class User {
     public User() {
     }
 
-    public User(int id, String name, String surname, String otchestvo, Country country, City city, String email, Date dateOfCreation) {
+    public User(int id, String name, String surname, String otchestvo, Country country, City city, String email, Timestamp dateOfCreation) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -132,11 +133,11 @@ public class User {
         this.email = email;
     }
 
-    public Date getDateOfCreation() {
+    public Timestamp getDateOfCreation() {
         return dateOfCreation;
     }
 
-    public void setDateOfCreation(Date date_of_creation) {
+    public void setDateOfCreation(Timestamp date_of_creation) {
         this.dateOfCreation = date_of_creation;
     }
 
