@@ -1,6 +1,7 @@
 package dev.seratt.mailing_system_main.form;
 
 
+import dev.seratt.mailing_system_main.entity.City;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -8,6 +9,7 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -39,6 +41,8 @@ public class UserForm {
             message = "Invalid email: does not match the pattern")
     private String email;
 
-    private Date dateOfCreation;
+    private Timestamp dateOfCreation;
+
+    private City city;
 
 }

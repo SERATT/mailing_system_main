@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 @Controller
 @RequestMapping("/spam")
@@ -34,7 +35,7 @@ public class SpamController {
     @GetMapping("/send_mail")
     public String sendEmail(@RequestParam("groupId") int groupId, Model model){
         Spam spam = new Spam();
-        spam.setSendDate(new Date(System.currentTimeMillis()));
+        spam.setSendDate(new Timestamp(System.currentTimeMillis()));
         model.addAttribute("spam", spam);
         this.groupId = groupId;
         return "spam-form";

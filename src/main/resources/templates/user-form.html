@@ -13,7 +13,7 @@
 <div style="width: 100vw; height: 100vh;" class="d-flex justify-content-center align-items-center">
     <div style="width: 40%; height: 50%;" class="d-flex flex-column justify-content-center align-items-center">
         <div>
-            <input type="hidden" class="user-city" name="id" th:value = "${user.city}">
+            <p style="display: none" class="user-city" th:text = "${user.city}">
         </div>
         <form class="flex" th:action="@{/users/save}" method = "post" th:modelAttribute = "user">
             <div>
@@ -29,7 +29,7 @@
                 surname <br> <input style="width: 100%" type="text" name="surname" th:value = "${user.surname}">
             </div>
             <div class="form-group">
-                otchestvo <br> <input style="width: 100%" type="text" name="otchestvo" th:value = "${user.otchestvo}">
+                patronymic <br> <input style="width: 100%" type="text" name="otchestvo" th:value = "${user.otchestvo}">
             </div>
             <div>
                 country
@@ -73,7 +73,7 @@
         const countrySelect = document.querySelector(".countrySelect")
         const countryId = countrySelect.value
         const citySelect = document.querySelector(".city-selection")
-        const city = document.querySelector(".user-city").getAttribute("value")
+        const city = document.querySelector(".user-city").textContent
         console.log(city)
         $.ajax({
             type: "GET",
