@@ -23,13 +23,13 @@
                 <input type="hidden" name="dateOfCreation" th:value = "${user.dateOfCreation}">
             </div>
             <div class="form-group">
-                name <br> <input style="width: 100%" type="text" name="name" th:value = "${user.name}">
+                name <br> <input style="width: 100%" required type="text" name="name" th:value = "${user.name}">
             </div>
             <div class="form-group">
-                surname <br> <input style="width: 100%" type="text" name="surname" th:value = "${user.surname}">
+                surname <br> <input style="width: 100%" required type="text" name="surname" th:value = "${user.surname}">
             </div>
             <div class="form-group">
-                patronymic <br> <input style="width: 100%" type="text" name="otchestvo" th:value = "${user.otchestvo}">
+                patronymic <br> <input style="width: 100%" required type="text" name="otchestvo" th:value = "${user.otchestvo}">
             </div>
             <div>
                 country
@@ -50,13 +50,13 @@
                 <select name="cityId" class="city-selection"></select>
             </div>
             <div class="form-group">
-                email <br> <input style="width: 100%" type="text" name="email" th:value = "${user.email}">
+                email <br> <input required style="width: 100%" type="text" name="email" th:value = "${user.email}">
             </div>
             <div class="form-group d-flex justify-content-center">
                 <input type="submit" value="Save" class="btn btn-success">
             </div>
-            <div class="form-group d-flex justify-content-center" th:if="${email_error_message == null}">
-                Error: <p th:text="${email_error_message}"></p>
+            <div class="form-group d-flex justify-content-center" th:if="${error_message != null}">
+                Error: <p th:text="${error_message}"></p>
             </div>
             <ul>
                 <li th:each="err : ${#fields.errors('user.*')}" th:text="${err}" />

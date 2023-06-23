@@ -18,7 +18,7 @@
 </div>
 <br>
 <div class = "d-flex justify-content-center">
-    <form th:action="@{/users/save_update}">
+    <form th:action="@{/users/form}">
         <input type="hidden" name="id" th:value = "0">
         <input type="submit" value="Create" class="btn btn-success">
     </form>
@@ -50,7 +50,7 @@
         <td th:text = "${user.email}"></td>
         <td th:text = "${user.dateOfCreation}"></td>
         <td>
-            <form th:action="@{/users/save_update}" method="get">
+            <form th:action="@{/users/form}" method="get">
                 <input type="hidden" name="id"  th:value = "${user.id}">
                 <input type="submit" value="Update" class="btn btn-primary">
             </form>

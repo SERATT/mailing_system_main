@@ -2,6 +2,7 @@ package dev.seratt.mailing_system_main.form;
 
 
 import dev.seratt.mailing_system_main.entity.City;
+import dev.seratt.mailing_system_main.entity.Country;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
@@ -42,6 +43,8 @@ public class UserForm {
     private String email;
 
     private Timestamp dateOfCreation;
+
+    private Country country;
 
     private City city;
 

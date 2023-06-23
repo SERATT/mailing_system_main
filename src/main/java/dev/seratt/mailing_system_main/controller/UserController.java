@@ -4,6 +4,7 @@ import dev.seratt.mailing_system_main.entity.Group;
 import dev.seratt.mailing_system_main.entity.User;
 import dev.seratt.mailing_system_main.form.UserForm;
 import dev.seratt.mailing_system_main.service.*;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -33,7 +34,7 @@ public class UserController {
     @Autowired
     private CityService cityService;
 
-    @GetMapping("/save_update")
+    @GetMapping("/form")
     public String updateUser(@RequestParam("id") int id, Model model){
         User user;
         if(id == 0){
@@ -47,23 +48,31 @@ public class UserController {
         return "user-form";
     }
     @PostMapping(value = "/save")
-    public String saveUser(@ModelAttribute("user") @Valid UserForm userForm, BindingResult bindingResult, Model model){
+    public String saveUser(@ModelAttribute("user") @Valid UserForm userForm, BindingResult bindingResult, Model model, HttpServletRequest request){
         if(bindingResult.hasErrors()){
+            model.addAttribute("countryList", countryService.getAllCountries());
             return "user-form";
-
         }
+
         String email = userForm.getEmail();
-        if(!userService.checkEmailUniqueness(email) && userForm.getId() == 0){
-            model.addAttribute("email_error_message", "Email is not unique");
-            return "user-form";
-        }
-
         User user;
+
         if(userForm.getId() == 0){
+            if(!userService.checkEmailUniqueness(email)){
+                model.addAttribute("error_message", "Email is not unique");
+                model.addAttribute("countryList", countryService.getAllCountries());
+                return "user-form";
+            }
             user = new User();
             user.setDateOfCreation(new Timestamp(System.currentTimeMillis()));
         } else {
             user = userService.getUser(userForm.getId());
+            if(!user.getEmail().equals(userForm.getEmail()) && !userService.checkEmailUniqueness(email)){
+                model.addAttribute("error_message", "Email is not unique");
+                model.addAttribute("countryList", countryService.getAllCountries());
+                model.addAttribute("user", user);
+                return "user-form";
+            }
         }
         user.setName(userForm.getName());
         user.setSurname(userForm.getSurname());
