@@ -34,9 +34,6 @@
             <div>
                 country
             </div>
-<!--            <div class="form-group" th:each="country : ${countryList}">-->
-<!--                <input required type="radio" name="country" th:value = "${country}" th:text="${country}">-->
-<!--            </div>-->
             <div class="form-group">
                 <select name="countryId" class="countrySelect" onchange="updateCitiesList()">
                     <option th:each="country : ${countryList}" th:value="${country.id}" th:text="${country.name}"
